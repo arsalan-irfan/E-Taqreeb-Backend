@@ -581,7 +581,6 @@ router.post("/acceptOrder", auth, async (req, res) => {
     let lawn = await Lawn.findOne({ _id: order.lawnId }, { company: 1 })
     let payloadAccepted={ userId: order.userId, msg: `${lawn.company} has accepted your order` }
     console.log("PayloadAccepted",payloadAccepted);
-    
     ioServer.io.emit('lawnOrderAccepted', payloadAccepted)
 
     const { packageId } = order;

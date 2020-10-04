@@ -758,6 +758,10 @@ router.post("/acceptOrder", auth, async (req, res) => {
         { $push: { date: order.bookingDate } }
       );
       if (result) {
+        let photographer = await Photographer.findOne({ _id: order.photographerId }, { company: 1 })
+        let payloadAccepted = { userId: order.userId, msg: `${photographer.company} has accepted your order` }
+        console.log("PayloadAccepted", payloadAccepted);
+        ioServer.io.emit('photographerOrderAccepted', payloadAccepted)
         return res
           .status(200)
           .json({ msg: "Order has been accepted successfully" });
@@ -778,7 +782,7 @@ router.post("/acceptOrder", auth, async (req, res) => {
 router.delete("/rejectOrder/:id", auth, async (req, res) => {
   const { id } = req.params;
   try {
-    await PhotographerOrder.findOneAndUpdate({ _id: id }, {
+    let order = await PhotographerOrder.findOneAndUpdate({ _id: id }, {
       status: 2
     });
     // let photographer = await Photographer.findOne(
@@ -793,7 +797,9 @@ router.delete("/rejectOrder/:id", auth, async (req, res) => {
     // let temp = photographer.orders.filter((o) => o._id != id);
     // photographer.orders = temp;
     // await photographer.save();
+    let photographer = await Photographer.findOne({ _id: order.photographerId }, { company: 1 })
 
+    ioServer.io.emit('photographerOrderRejected', { userId: order.userId, msg: `${photographer.company} has rejected your order` })
     return res.status(200).json({ msg: "order rejected successfully" });
   } catch (error) {
     return res

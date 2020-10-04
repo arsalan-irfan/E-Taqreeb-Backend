@@ -165,7 +165,7 @@ app.get("/addCollection", (req, res) => {
 
 
 app.get("/", (req, res) => {
-  res.status(200).send("Working");
+  res.status(200).send("Working ");
 });
 
 
