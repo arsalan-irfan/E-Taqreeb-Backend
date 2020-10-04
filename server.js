@@ -162,5 +162,12 @@ app.get("/addCollection", (req, res) => {
   message.save();
   res.status(200).send("added!");
 });
+
+
+app.get("/", (req, res) => {
+  res.status(200).send("Working");
+});
+
+
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 module.exports.io = io;
