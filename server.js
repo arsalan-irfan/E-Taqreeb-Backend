@@ -112,7 +112,7 @@ app.get(
     const token = jwt.sign(payload, "jwt-secret", { expiresIn: 360000 });
     // console.log(token);
     res.cookie("auth", token);
-    res.redirect("https://e-taqreeb.web.app/login/social");
+    res.redirect("http://localhost:3000/login/social");
   }
 );
 

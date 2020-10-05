@@ -114,7 +114,7 @@ module.exports = function (passport) {
       {
         clientID: FACEBOOK_CLIENT_ID,
         clientSecret: FACEBOOK_CLIENT_SECRET,
-        callbackURL: "https://e-taqreeb-api.herokuapp.com/return",
+        callbackURL: "http://localhost:5000/return",
         profileFields: ["emails", "name", "picture.type(large)"],
       },
       function (accessToken, refreshToken, profile, done) {
@@ -155,7 +155,7 @@ module.exports = function (passport) {
       {
         clientID: GOOGLE_CLIENT_ID,
         clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://e-taqreeb-api.herokuapp.com/returnG",
+        callbackURL: "http://localhost:5000/returnG",
         profileFields: ["emails", "name", "photos"],
       },
       function (accessToken, refreshToken, profile, done) {
