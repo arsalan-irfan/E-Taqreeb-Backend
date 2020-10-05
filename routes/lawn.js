@@ -803,6 +803,7 @@ router.post("/search", auth, async (req, res) => {
                   $regex: searchString,
                   $options: "i",
                 },
+                publish:true
               },
             ],
           },
