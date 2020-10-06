@@ -534,7 +534,7 @@ router.get("/getOrderHistory/:id", auth, async (req, res) => {
   try {
     const order = await LawnOrder.find(
       { userId: id },
-      { createdAt: 1, status: 1 }
+      { createdAt: 1, status: 1,bookingDate:1 }
     ).populate({ path: "lawnId", select: { company: 1, businessEmail: 1 } });
 
     const order2 = await PhotographerOrder.find(
